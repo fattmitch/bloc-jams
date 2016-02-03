@@ -28,6 +28,26 @@ var albumMarconi = {
     ]
 };
 
+var albumCoconutWillie = {
+    name: 'Coconut Willie is Here',
+    artist: 'Coconut Willie',
+    label: 'Willie\'s Jams',
+    year: '2016',
+    albumArtUrl: 'assets/images/album_covers/willie.jpg',
+    songs: [
+        { name: 'Willie\'s here', length: '2:02'},
+        { name: 'Surf or Die', length: '2:32'},
+        { name: 'Yewwwwwwwww', length: '3:30'},
+        { name: 'The Wave of Life', length: '4:10'},
+        { name: 'Into the Sunset', length: '6:21'},
+        { name: 'Hey Now, That\'s not nice', length: '1:46'},
+        { name: 'Negative Ions, Positive Vibes', length: '4:20'},
+        { name: 'The Sea Becons', length: '3:45'},
+        { name: 'Chipshot', length: '3:18'},
+        { name: 'Toobin\' Tiyam', length: '2:02'},
+    ]
+};
+
 var createSongRow = function (songNumber, songName, songLength) {
     var template = 
         '<tr class="album-view-song-item">'
@@ -40,12 +60,13 @@ var createSongRow = function (songNumber, songName, songLength) {
     return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function (album) {
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
     
     albumTitle.firstChild.nodeValue = album.name;
     albumArtist.firstChild.nodeValue = album.artist;
@@ -61,4 +82,14 @@ var setCurrentAlbum = function (album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+    var albums = [albumPicasso, albumMarconi, albumCoconutWillie];
+    var index = 0;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);
+        index++;
+        if (index == albums.length) {
+            index = 0;
+        }
+    });
 };
